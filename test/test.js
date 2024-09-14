@@ -5,6 +5,10 @@ describe('Math Functions', () => {
     const result = add("2, 3");
     expect(result).to.equal(5);
   });
+  it('should add many numbers', () => {
+    const result = add("1,2,3,4,5,6");
+    expect(result).to.equal(21);
+  });
   it('empty string', () => {
     const result = add("");
     expect(result).to.equal(0);
@@ -13,8 +17,28 @@ describe('Math Functions', () => {
     const result = add("2");
     expect(result).to.equal(2);
   });
-  it('empty string with limiter', () => {
+  it('empty string with only limiter', () => {
     const result = add(",");
     expect(result).to.equal(0);
+  });
+  it('string with \\n limiter', () => {
+    const result = add("1\n2,3");
+    expect(result).to.equal(6);
+  });
+  it('string with custom limiter', () => {
+    const result = add("//;\n1;2;3");
+    expect(result).to.equal(6);
+  });
+  it('should add many numbers', () => {
+    const result = add("//;\n1;2;3;4;5;6");
+    expect(result).to.equal(21);
+  });
+  it('string with negative number', () => {
+    const result = add("-1,2,-3");
+    expect(result).to.equal("Negative numbers not allowed -1,-3");
+  });
+  it('string with negative number and custom limiter', () => {
+    const result = add("//;\n1;2;-3");
+    expect(result).to.equal("Negative numbers not allowed -3")
   });
 })
